@@ -1,7 +1,7 @@
 " From http://got-ravings.blogspot.com/2008/07/vim-pr0n-visual-search-mappings.html
 
 " makes * and # work on visual mode too.  global function so user mappings can call it.
-" specifying 'raw' for the second argument prevents escaping the result for vimgrep
+" specifying 'raw' for the second argument prevents escaping the result for grep
 " TODO: there's a bug with raw mode.  since we're using @/ to return an unescaped
 " search string, vim's search highlight will be wrong.  Refactor plz.
 function! VisualStarSearchSet(cmdtype,...)
@@ -21,11 +21,11 @@ endfunction
 xnoremap * :<C-u>call VisualStarSearchSet('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call VisualStarSearchSet('?')<CR>?<C-R>=@/<CR><CR>
 
-" recursively vimgrep for word under cursor or selection
+" recursively grep for word under cursor or selection
 if maparg('<leader>*', 'n') == ''
-  nnoremap <leader>* :execute 'noautocmd vimgrep /\V' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '/ **'<CR>
+  nnoremap <leader>* :execute 'noautocmd Grep /\V' . substitute(escape(expand("<cword>"), '\'), '\n', '\\n', 'g') . '/ **'<CR>
 endif
 if maparg('<leader>*', 'v') == ''
-  vnoremap <leader>* :<C-u>call VisualStarSearchSet('/')<CR>:execute 'noautocmd vimgrep /' . @/ . '/ **'<CR>
+  vnoremap <leader>* :<C-u>call VisualStarSearchSet('/')<CR>:execute 'noautocmd Grep /' . @/ . '/ **'<CR>
 endif
 
