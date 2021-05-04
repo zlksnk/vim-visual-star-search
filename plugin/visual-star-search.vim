@@ -23,9 +23,9 @@ xnoremap # :<C-u>call VisualStarSearchSet('?')<CR>?<C-R>=@/<CR><CR>
 
 " recursively grep for word under cursor or selection
 if maparg('<leader>*', 'n') == ''
-  nnoremap <leader>* :execute 'noautocmd Grep ' . shellescape(expand("<cword>"))<CR>
+  nnoremap <silent><leader>* :execute 'noautocmd Grep ' . shellescape(expand("<cword>"))<CR>
 endif
 if maparg('<leader>*', 'v') == ''
-  vnoremap <leader>* :<C-u>call VisualStarSearchSet('/')<CR>:execute 'noautocmd vimgrep /' . @/ . '/ **'<CR>
+  vnoremap <silent><leader>* :<C-u>call VisualStarSearchSet('/')<CR>:execute 'noautocmd Grep ' . shellescape(@/)<CR>
 endif
 
