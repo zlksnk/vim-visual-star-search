@@ -23,6 +23,8 @@ xnoremap # :<C-u>call VisualStarSearchSet('?')<CR>?<C-R>=@/<CR><CR>
 
 " recursively grep for word under cursor or selection
 if maparg('<leader>*', 'n') == ''
+  " there is `<cexpr>` too that will select `console.log` if cursor is on `log` of
+  " `console.log("something")` instead of just selecting `log`
   nnoremap <silent><leader>* :execute 'noautocmd Grep ' . shellescape(expand("<cword>"))<CR>
 endif
 if maparg('<leader>*', 'v') == ''
