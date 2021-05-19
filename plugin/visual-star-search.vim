@@ -26,9 +26,9 @@ if maparg('<leader>*', 'n') == ''
   " there is `<cexpr>` too that will select `console.log` if cursor is on `log` of
   " `console.log("something")` instead of just selecting `log`
   " but a variable could be destructed at some point so it's better to keep `<cword>`
-  nnoremap <silent><leader>* :execute 'noautocmd Grep ' . shellescape(expand("<cword>"))<CR>
+  nnoremap <silent><leader>* :execute 'noautocmd Grep ' . expand("<cword>")<CR>
 endif
 if maparg('<leader>*', 'v') == ''
-  vnoremap <silent><leader>* :<C-u>call VisualStarSearchSet('/')<CR>:execute 'noautocmd Grep ' . shellescape(@/)<CR>
+  vnoremap <silent><leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:execute 'noautocmd Grep ' . @/<CR>
 endif
 
