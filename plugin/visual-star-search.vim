@@ -25,6 +25,7 @@ function! s:correctescape(arg) abort
   let l:res = substitute(l:res, ']', '\\\]', 'g')
   let l:res = substitute(l:res, '{', '\\\{', 'g')
   let l:res = substitute(l:res, '}', '\\\}', 'g')
+  let l:res = shellescape(l:res)
   return l:res
 endfunction
 
