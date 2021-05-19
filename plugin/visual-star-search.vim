@@ -17,6 +17,18 @@ function! VisualStarSearchSet(cmdtype,...)
   let @" = temp
 endfunction
 
+function! s:correctescape(arg) abort
+  let l:res = a:arg
+  let l:res = substitute(l:res, '(', '\\\(', 'g')
+  let l:res = substitute(l:res, ')', '\\\)', 'g')
+  let l:res = substitute(l:res, '[', '\\\[', 'g')
+  let l:res = substitute(l:res, ']', '\\\]', 'g')
+  let l:res = substitute(l:res, '{', '\\\{', 'g')
+  let l:res = substitute(l:res, '}', '\\\}', 'g')
+  return l:res
+endfunction
+
+
 " replace vim's built-in visual * and # behavior
 xnoremap * :<C-u>call VisualStarSearchSet('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call VisualStarSearchSet('?')<CR>?<C-R>=@/<CR><CR>
@@ -29,6 +41,6 @@ if maparg('<leader>*', 'n') == ''
   nnoremap <silent><leader>* :execute 'noautocmd Grep ' . expand("<cword>")<CR>
 endif
 if maparg('<leader>*', 'v') == ''
-  vnoremap <silent><leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:execute 'noautocmd Grep ' . @/<CR>
+  vnoremap <silent><leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:execute 'noautocmd Grep ' . <sid>correctescape(@/)<CR>
 endif
 
