@@ -26,6 +26,7 @@ function! s:correctescape(arg) abort
   let l:res = substitute(l:res, '{', '\\\{', 'g')
   let l:res = substitute(l:res, '}', '\\\}', 'g')
   let l:res = shellescape(l:res)
+  " TODO: correctly escape ^ and $ symbols
   return l:res
 endfunction
 
